@@ -17,9 +17,9 @@ router.get("/pets", (req, res, next) => {
 });
 
 router.post("/pets", (req, res, next) => {
-    const { image, name } = req.body;
+    const { image, name, dates } = req.body;
   
-    Pet.create({ image, name })
+    Pet.create({ image, name, dates })
       .then((response) => res.json(response))
       .catch((err) => res.json(err));
   });
