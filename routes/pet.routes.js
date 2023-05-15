@@ -4,10 +4,10 @@ const Pet = require("../models/Pet.model");
 /*const MongoStore = require("connect-mongo");
 const Review = require("../models/Review.model");
 const { isLoggedIn } = require("../middleware/user.logedin");*/
-/* GET pets page */
 
+/* GET pets page */
+// Get the PetsList from db
 router.get("/pets", (req, res, next) => {
-  // Get the PetsList from db
   Pet.find()
     .then((petsFromDB) => {
       console.log(petsFromDB);
@@ -16,12 +16,49 @@ router.get("/pets", (req, res, next) => {
     .catch((err) => next(err));
 });
 
-router.post("/pets", (req, res, next) => {
-    const { image, name, dates } = req.body;
-  
-    Pet.create({ image, name, dates })
-      .then((response) => res.json(response))
-      .catch((err) => res.json(err));
+//Getting specific type of pets from DB
+// Get dogs from db
+router.get("/dogs", (req, res, next) => {
+    Pet.find({ species: "dog" })
+      .then((petsFromDB) => {
+        console.log(petsFromDB);
+        res.json({ petsFromDB });
+      })
+      .catch((err) => next(err));
   });
+
+  // Get cats from db
+  router.get("/cats", (req, res, next) => {
+    Pet.find({ species: "cat" })
+      .then((petsFromDB) => {
+        console.log(petsFromDB);
+        res.json({ petsFromDB });
+      })
+      .catch((err) => next(err));
+  });
+
+  // Get others from db
+  router.get("/others", (req, res, next) => {
+    Pet.find({ species: "other" })
+      .then((petsFromDB) => {
+        console.log(petsFromDB);
+        res.json({ petsFromDB });
+      })
+      .catch((err) => next(err));
+  });
+
+  //get one single pet to show the petPage
+  router.get("/pets/:petId", (req, res) => {
+    const { petId } = req.params;
+    console.log(petId);
+  
+    Pet.findOne({ petId })
+     // .populate("reviews")
+      .then((petsFromDB) => {
+        console.log(petsFromDB);
+        res.json({ petsFromDB });
+      });
+  });
+
 
 module.exports = router;

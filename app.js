@@ -24,6 +24,9 @@ app.use("/auth", authRouter);
 const petRouter = require("./routes/pet.routes");
 app.use("/pets", petRouter);
 
+const userRouter = require("./routes/user.routes");
+app.use("/auth", userRouter);
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
