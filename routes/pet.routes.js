@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const Pet = require("../models/Pet.model");
-/*const MongoStore = require("connect-mongo");
 const Review = require("../models/Review.model");
-const { isLoggedIn } = require("../middleware/user.logedin");*/
+/*const MongoStore = require("connect-mongo");
+const { isAuthenticated } = require("../middleware/jwt.middleware");*/
 
 /* GET pets page */
 // Get the PetsList from db
@@ -48,17 +48,31 @@ router.get("/dogs", (req, res, next) => {
   });
 
   //get one single pet to show the petPage
-  router.get("/pets/:petId", (req, res) => {
-    const { petId } = req.params;
-    console.log(petId);
+  router.get("/pets/:id", (req, res) => {
+    const { id } = req.params;
+    console.log("pet id", id);
   
-    Pet.findOne({ petId })
-     // .populate("reviews")
-      .then((petsFromDB) => {
-        console.log(petsFromDB);
-        res.json({ petsFromDB });
+    Pet.findOne({ _id: id })
+      .populate("reviews")
+      .then((petFromDB) => {
+        console.log(petFromDB);
+        res.json({ petFromDB });
       });
   });
 
+  //CREATE REVIEWS
+router.post("/pets/:id/reviews", (req, res) => {
+  const { username, review } = req.body;
+  const { id } = req.params;
+  
+  Review.create({ username: username, review: review }).then((newReview) => {
+    Pet.findOneAndUpdate(
+      { _id: id },
+      { $push: { reviews: newReview._id } }
+    ).then(() => {
+      res.json({ success: true });
+    });
+  });
+});
 
 module.exports = router;

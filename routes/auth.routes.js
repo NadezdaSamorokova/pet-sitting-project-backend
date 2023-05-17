@@ -94,10 +94,12 @@ router.post('/login', (req, res, next) => {
 
       if (passwordCorrect) {
         // Deconstruct the user object to omit the password
-        const { _id, email, username } = foundUser;
+        //I put here everything I want to appear on the Profile page
+        const { _id, email, username, role, image } = foundUser;
         
         // Create an object that will be set as the token payload
-        const payload = { _id, email, username };
+        //I put here everything I want to appear on the Profile page
+        const payload = { _id, email, username, role, image };
 
         // Create and sign the token
         const authToken = jwt.sign( 

@@ -8,7 +8,7 @@ const petSchema = new Schema(
       trim: true,
       required: true
     },
-    breed: String,
+    size: String,
     species: {
         type: String,
         enum: ["dog", "cat", "other"],
@@ -25,7 +25,13 @@ const petSchema = new Schema(
     dates: {
       type: String,
       required: true
-    }
+    },
+    reviews: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Review",
+      },
+    ],
   }
 );
 
