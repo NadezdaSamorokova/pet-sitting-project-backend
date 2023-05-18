@@ -19,7 +19,7 @@ const petSchema = new Schema(
         required: true,
       },
 
-    age: Number,
+    age: String,
     image: String,
     description: String,
     dates: {
