@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-// TODO: Please make sure you edit the User model to whatever makes sense in this case
+// Defined the Pet Schema
 const petSchema = new Schema(
   {
     name: {
@@ -35,6 +35,7 @@ const petSchema = new Schema(
   }
 );
 
+// Created the Pet model
 const Pet = model("Pet", petSchema);
 
 module.exports = Pet;

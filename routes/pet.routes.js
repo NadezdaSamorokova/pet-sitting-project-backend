@@ -3,7 +3,6 @@ const router = express.Router();
 const Pet = require("../models/Pet.model");
 const Review = require("../models/Review.model");
 const { isAuthenticated } = require("../middleware/jwt.middleware");
-/*const MongoStore = require("connect-mongo");*/
 
 /* GET pets page */
 // Get the PetsList from db
@@ -60,7 +59,7 @@ router.get("/dogs", (req, res, next) => {
       });
   });
 
-  //CREATE REVIEWS
+//Create Reviews
 router.post("/pets/:id/reviews",  (req, res) => {
   const { username, review } = req.body;
   const { id } = req.params;

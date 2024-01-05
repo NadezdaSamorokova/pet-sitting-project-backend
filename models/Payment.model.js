@@ -1,3 +1,4 @@
+// This model is not used yet. Made it for the future update
 const { Schema, model } = require("mongoose");
 
 // Define the Payment Schema

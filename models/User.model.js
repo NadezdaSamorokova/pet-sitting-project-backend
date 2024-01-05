@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-// TODO: Please make sure you edit the User model to whatever makes sense in this case
+// Defined the User Schema
 const userSchema = new Schema(
   {
     username: {
@@ -29,12 +29,12 @@ const userSchema = new Schema(
     image: String,
     about: String
   },
-  {
-    // this second object adds extra properties: `createdAt` and `updatedAt`    
+  {    
     timestamps: true
   }
 );
 
+// Created the User model
 const User = model("User", userSchema);
 
 module.exports = User;

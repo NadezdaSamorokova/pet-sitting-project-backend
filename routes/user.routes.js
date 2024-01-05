@@ -53,7 +53,4 @@ router.put('/users/:userId', (req, res, next) => {
     .catch((err) => next(err));
 });
 
-
-
-
-  module.exports = router;
+module.exports = router;
